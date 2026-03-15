@@ -16,7 +16,7 @@ from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 
 
-DEFAULT_LAS_BASE_URL = "https://ark.cn-beijing.volces.com"
+DEFAULT_ARK_BASE_URL = "https://ark.cn-beijing.volces.com"
 SEEDANCE_TASK_PATH = "/api/v3/contents/generations/tasks"
 SEEDANCE_DEFAULT_MODEL = "doubao-seedance-2-0-260128"
 DOUYIN_AUTHORIZE_URL = "https://open.douyin.com/platform/oauth/connect/"

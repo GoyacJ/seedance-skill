@@ -29,7 +29,7 @@
 
 - `https://ark.cn-beijing.volces.com`
 
-也可通过 `ARK_BASE_URL` 覆盖，兼容旧变量 `LAS_BASE_URL`。
+也可通过 `ARK_BASE_URL` 覆盖。
 
 ## 典型请求体
 
@@ -74,7 +74,6 @@
 
 - 必需：`ARK_API_KEY`
 - 可选：`ARK_BASE_URL`
-- 兼容旧变量：`LAS_API_KEY`、`LAS_BASE_URL`
 
 当前脚本不提供占位调用或 dry-run 模式。缺少 `ARK_API_KEY` 时，直接返回阻塞结果并退出。
 

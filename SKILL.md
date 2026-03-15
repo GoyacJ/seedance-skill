@@ -67,7 +67,6 @@ python3 {baseDir}/scripts/generate_video.py \
 
 - `ARK_API_KEY`
 - 可选 `ARK_BASE_URL`
-- 兼容旧变量：`LAS_API_KEY`、`LAS_BASE_URL`
 
 脚本会写出：
 
@@ -172,8 +171,6 @@ python3 {baseDir}/scripts/douyin_auth.py refresh --refresh-token "<refresh_token
 
 - `ARK_API_KEY`
 - `ARK_BASE_URL`
-- `LAS_API_KEY`
-- `LAS_BASE_URL`
 - `DOUYIN_CLIENT_KEY`
 - `DOUYIN_CLIENT_SECRET`
 - `DOUYIN_REDIRECT_URI`

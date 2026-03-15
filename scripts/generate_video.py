@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 
 from seedance_skill_common import (
-    DEFAULT_LAS_BASE_URL,
+    DEFAULT_ARK_BASE_URL,
     SEEDANCE_TASK_PATH,
     blocked_payload,
     build_seedance_request,
@@ -27,7 +27,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="使用豆包 Seedance 文生视频接口生成短视频。")
     parser.add_argument("--prompt", required=True, help="视频创意或详细提示词。")
     parser.add_argument("--output-dir", help="输出目录；不传时写入 outputs/<timestamp>/。")
-    parser.add_argument("--base-url", default=env("ARK_BASE_URL") or env("LAS_BASE_URL") or DEFAULT_LAS_BASE_URL, help="Seedance Base URL。")
+    parser.add_argument("--base-url", default=env("ARK_BASE_URL") or DEFAULT_ARK_BASE_URL, help="Seedance Base URL。")
     parser.add_argument("--poll-interval", type=float, default=5.0, help="轮询任务状态的间隔秒数。")
     parser.add_argument("--max-polls", type=int, default=120, help="最多轮询次数。")
     return parser.parse_args()
@@ -41,7 +41,7 @@ def main() -> int:
     result_file = output_dir / "generation.json"
     write_json(request_file, request_payload)
 
-    api_key = env("ARK_API_KEY") or env("LAS_API_KEY")
+    api_key = env("ARK_API_KEY")
     if not api_key:
         payload = blocked_payload(
             "缺少 Seedance 凭证，无法发起真实生成。",

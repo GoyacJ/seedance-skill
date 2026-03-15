@@ -79,8 +79,6 @@
 
 - `ARK_API_KEY`
 - `ARK_BASE_URL`
-- `LAS_API_KEY`
-- `LAS_BASE_URL`
 
 抖音授权与发布相关：
 

@@ -32,9 +32,9 @@ class SeedanceSkillTests(unittest.TestCase):
         self.assertIn("{baseDir}/scripts/generate_video.py", skill_md)
 
     def test_seedance_api_defaults_match_ark_v3(self):
-        from scripts.seedance_skill_common import DEFAULT_LAS_BASE_URL, SEEDANCE_TASK_PATH
+        from scripts.seedance_skill_common import DEFAULT_ARK_BASE_URL, SEEDANCE_TASK_PATH
 
-        self.assertEqual(DEFAULT_LAS_BASE_URL, "https://ark.cn-beijing.volces.com")
+        self.assertEqual(DEFAULT_ARK_BASE_URL, "https://ark.cn-beijing.volces.com")
         self.assertEqual(SEEDANCE_TASK_PATH, "/api/v3/contents/generations/tasks")
 
     def test_build_seedance_request_uses_current_defaults(self):
@@ -128,7 +128,7 @@ class SeedanceSkillTests(unittest.TestCase):
                 "暴雨中的霓虹天桥，电影感跟拍镜头",
                 "--output-dir",
                 temp_dir,
-                extra_env={"ARK_API_KEY": "", "LAS_API_KEY": ""},
+                extra_env={"ARK_API_KEY": ""},
             )
 
             self.assertEqual(result.returncode, 1, result.stderr)
@@ -137,6 +137,21 @@ class SeedanceSkillTests(unittest.TestCase):
             self.assertIn("ARK_API_KEY", payload["missing"])
             self.assertTrue((Path(temp_dir) / "request.json").exists())
             self.assertTrue((Path(temp_dir) / "generation.json").exists())
+
+    def test_no_legacy_las_variables_remain_in_project_docs_or_scripts(self):
+        files = [
+            ROOT / "SKILL.md",
+            ROOT / "README.md",
+            ROOT / "references" / "seedance.md",
+            ROOT / "scripts" / "generate_video.py",
+            ROOT / "scripts" / "seedance_skill_common.py",
+        ]
+
+        for path in files:
+            content = path.read_text(encoding="utf-8")
+            self.assertNotIn("LAS_API_KEY", content, path.as_posix())
+            self.assertNotIn("LAS_BASE_URL", content, path.as_posix())
+            self.assertNotIn("DEFAULT_LAS_BASE_URL", content, path.as_posix())
 
     def test_douyin_h5_publish_requires_credentials(self):
         with tempfile.TemporaryDirectory() as temp_dir:
